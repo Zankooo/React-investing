@@ -1,38 +1,89 @@
-.App {
+h1{
   text-align: center;
+  
+  padding: 10px;
+  
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+
+/*oz ni mi jasno da rabis dva tadva da centiras formo*/
+body { /*sam jst nevem od kje je chat dubu ta body*/
+  text-align: center;
+  font-family: 'Asap Condensed', sans-serif;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+form {
+  display: inline-block;
+  text-align: left;
+  
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+
+.cela_forma{
+  background-color: whitesmoke;
+  border: 1px solid black;
+  margin: 20px;
+  
+
+}
+
+#rezultati{
+  background-color: floralwhite;
+  border-radius: 20px;
+  margin: 10px;
+  padding: 10px
+
+}
+
+
+.ni{
+  margin-left: 110px;
+  margin-top: 10px;
+  padding: 10px;
+  background-color: rgb(219, 48, 48);
   color: white;
+  border: 1px solid black;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.7s, color 0.7s; 
+  
 }
 
-.App-link {
-  color: #61dafb;
+
+.je{
+  background-color: rgb(46, 139, 46);
+  color: black;
+  margin-left: 110px;
+  margin-top: 10px;
+  padding: 10px;
+  transition: background-color 0.7s, color 0.7s; 
+  padding: 10px 20px;
+  border: 1px solid black;
+  cursor: pointer;
+  
+  
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+#spremeni-barvo{
+  background-color: white;
+  color: black;
+  cursor: pointer;
+}
+
+#spremeni-barvo.clicked{
+  background-color: black;
+  color: white;
+  cursor: pointer;
+}
+
+
+.prava{
+  background-color: rgb(23, 138, 23);
+
+
+}
+
+.napacna{
+  background-color: rgb(242, 78, 78);
+
 }
