@@ -8,9 +8,22 @@ function App() {
   const [donos, set_donos] = useState({donoss: '', je_prav: false});
   const [provizije_skladi, set_provizije_skladi] = useState({provizije: '', je_prav:  false});
   const [showResult, setShowResult] = useState(false);
+
   const [ali_je_vse_prav, set_ali_je_vse_prav] = useState(false)
 
   const [spremeni_barvo, set_spremeni_barvo] = useState(false); 
+
+
+  useEffect(() =>{
+    console.log(`Zacetna investiicja shranjeva v spremenljivki so: ${zacetna_investicija.kes} `);
+    console.log(`Leta v shranjeva  spremenljivki so: ${leta.leta} `);
+    console.log(`Donos v spremenljivki so: ${donos.donoss}`);
+    console.log(`Provizije skladi shranjene v spremenljivki so: ${provizije_skladi.provizije} `);
+    ali_vse_prav();
+    console.log(ali_je_vse_prav)
+    
+  }, [zacetna_investicija, leta, donos, provizije_skladi, ali_je_vse_prav]);
+
 
   //okej, zdej znam spreminjat eno lastnost css-ja.
   // v tem primeru background color
@@ -23,27 +36,22 @@ function App() {
 
   //djds 
   
-  //takoj ko se spremeni spremelnljivka, jo consol logamo tuki z useEffect
-  useEffect(() =>{
-    console.log(`Leta shranjeva v spremenljivki so: ${leta.leta}`);
-  }, [leta])
-
+  
+ 
   //vse te funkcije: vzamejo iz vsaka svojega inputa vrednost in jo izpisujejo v konzolo vedno ko se spreminja,
   //hkrati pa tudi shranjujejo vrednost v globalno spremenljivko in tut to izpisujejo, da je zih shranjena vrednost v spremenljivki
   function handle_change_zacetna_investicija(event){
     const input_vrednost_zacetna = event.target.value;
     //preveri ali je input sploh cifra in ce je cifra ce je vecja ali enaka 0 in preveri ce je sploh kej notr napisano
     if(!isNaN(input_vrednost_zacetna) && (input_vrednost_zacetna >= 0) && (input_vrednost_zacetna.trim() !== '') ){
-      console.log(`Zacetna investicija je: ${input_vrednost_zacetna}`);
       set_zacetna_investicija({kes:input_vrednost_zacetna, je_prav: true});
       //zgleda da ona je shranjena v variable ampak sam noce jo izpisat. zgleda je tko, tko nekak je ja.
-      console.log(`Zacetna investicija shranjena v spremenljivki je: ${zacetna_investicija.kes} in ${zacetna_investicija.je_prav}`);
+      
     }
     else{
       set_zacetna_investicija({kes:'', je_prav: false});
-      console.log(`Zacetna investicija input ni stevilo`);
+      
     }
-    
     
   }
   
@@ -53,13 +61,12 @@ function App() {
   function handle_change_leta(event) {
     const input_vrednost_leta = event.target.value;
     if(!isNaN(input_vrednost_leta) && (input_vrednost_leta >= 1) && (input_vrednost_leta.trim() !== '')){
-      console.log(`Leta: ${input_vrednost_leta} in $`);
+      
       set_leta({leta: input_vrednost_leta, je_prav: true});
-      console.log(`Leta shranjena v spremenljivki: ${leta.leta} in ${leta.je_prav}`);
     }
     else{
       set_leta({leta: '', je_prav: false});
-      console.log(`Leta input niso stevilo`);
+      
     }
   };
 
@@ -68,28 +75,24 @@ function App() {
   function handle_change_donos(event) {
     const input_vrednost_donos = event.target.value;
     if(!isNaN(input_vrednost_donos) && (input_vrednost_donos >= 1) && (input_vrednost_donos.trim() !== '')){
-      console.log(`Donos je ${input_vrednost_donos}`);
       set_donos({donoss: input_vrednost_donos, je_prav: true});
-      console.log(`Donos shranjen v spremenljivki je: ${donos.donoss} in ${donos.je_prav}`);
     }
     else{
       set_donos({donoss: '', je_prav: false});
-      console.log(`Donos input ni stevilo`)
     }
   };
+
+  
 
 //---------------------
 
   function handle_change_provizije(event){
     const input_vrednost_provizije = event.target.value;
     if(!isNaN(input_vrednost_provizije) && (input_vrednost_provizije >= 0) && (input_vrednost_provizije.trim() !== '')){
-      console.log(`Provizije so ${input_vrednost_provizije}`)
       set_provizije_skladi({provizije: input_vrednost_provizije, je_prav: true})
-      console.log(`Provizije shranjene v spremenljivki so: ${provizije_skladi.provizije} in ${provizije_skladi.je_prav} `)
     }
     else{
       set_provizije_skladi({donoss: '', je_prav: false});
-      console.log(`Provizije input niso stevilo`)
     }
   };
 
@@ -177,12 +180,10 @@ function App() {
     function ali_vse_prav(){
       if((zacetna_investicija.je_prav === true) && (leta.je_prav === true) && (donos.je_prav === true) && (provizije_skladi.je_prav === true)){
         set_ali_je_vse_prav(true)
-        console.log("je prav vse")
         
       }
       else{
         set_ali_je_vse_prav(false)
-        console.log("nekaj ni prav")
       }
     }
   
@@ -194,21 +195,21 @@ function App() {
 
         <form className='forma'>
           <label htmlFor="zacetna_investicija">Začetna investicija: </label>
-          <input type='text' className={zacetna_investicija.je_prav ? 'prava' : 'napacna'} onChange={ (event) => {handle_change_zacetna_investicija(event) ; ali_vse_prav()} } required></input>
+          <input type='text' className={zacetna_investicija.je_prav ? 'prava' : 'napacna'} onChange={ (event) => {handle_change_zacetna_investicija(event)} } required></input>
           
           <br></br>
           <br></br>
           <label htmlFor="leta">Koliko let boste držali notri keš? </label>
           {/* ce hocemo samo eno funkcijo klicati on change, damo normalno samo on change in v zavite oklepaje to nunkcijo, ce pa hocemo dve nardimo pa tkole*/}
-          <input type='text' className={leta.je_prav ? 'prava' : 'napacna'} onChange={ (event) => {handle_change_leta(event); ali_vse_prav()} } required></input>
+          <input type='text' className={leta.je_prav ? 'prava' : 'napacna'} onChange={ (event) => {handle_change_leta(event)} } required></input>
           <br></br>
           <br></br>
           <label htmlFor="donos">Donos v %: </label>
-          <input type='text' className={donos.je_prav ? 'prava' : 'napacna'} onChange={ (event) => {handle_change_donos(event); ali_vse_prav()} } required></input>
+          <input type='text' className={donos.je_prav ? 'prava' : 'napacna'} onChange={ (event) => {handle_change_donos(event)} } required></input>
           <br></br>
           <br></br>
           <label htmlFor="provizije">Provizije pri skladih: </label>
-          <input type='text' className={provizije_skladi.je_prav ? 'prava' : 'napacna'} onChange={ (event) => {handle_change_provizije(event); ali_vse_prav()} } required></input>
+          <input type='text' className={provizije_skladi.je_prav ? 'prava' : 'napacna'} onChange={ (event) => {handle_change_provizije(event)} } required></input>
           <br></br>
           <br></br>
           
