@@ -15,6 +15,7 @@ function App() {
 
 
   useEffect(() =>{
+    console.log("burek");
     console.log(`Zacetna investiicja shranjeva v spremenljivki so: ${zacetna_investicija.kes} `);
     console.log(`Leta v shranjeva  spremenljivki so: ${leta.leta} `);
     console.log(`Donos v spremenljivki so: ${donos.donoss}`);
@@ -241,3 +242,4 @@ function App() {
 export default App;
 
 //DELA VSE VSE DELA KUL, SAM PROBLEM IMAM Z UNIM KORAKOM K UPDEJTA EN KORAK PREPOZNO :)
+// BUREK
