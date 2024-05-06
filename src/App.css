@@ -15,7 +15,6 @@ body { /*sam jst nevem od kje je chat dubu ta body*/
 form {
   display: inline-block;
   text-align: left;
-  
 }
 
 
@@ -23,8 +22,6 @@ form {
   background-color: whitesmoke;
   border: 1px solid black;
   margin: 20px;
-  
-
 }
 
 #rezultati{
@@ -36,7 +33,7 @@ form {
 }
 
 
-.ni{
+.ni {
   margin-left: 110px;
   margin-top: 10px;
   padding: 10px;
@@ -50,7 +47,7 @@ form {
 }
 
 
-.je{
+.je {
   background-color: rgb(46, 139, 46);
   color: black;
   margin-left: 110px;
@@ -76,14 +73,18 @@ form {
   cursor: pointer;
 }
 
-
-.prava{
-  background-color: rgb(23, 138, 23);
-
-
+input:focus{
+  outline: none;
 }
 
-.napacna{
-  background-color: rgb(242, 78, 78);
+input[type=text].empty {
+  border: 2px solid rgb(170, 170, 170);
+}
 
+.valid{
+  border: 3px solid rgb(23, 138, 23) !important;
+}
+
+.invalid{
+  border: 3px solid rgb(242, 78, 78) !important;
 }
