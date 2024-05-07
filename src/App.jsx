@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import './App.css';
 
+
 function App() {
 
   // Nočemo, da se izračuni spreminjajo ob spremembi vrednosti, zato uporabimo useRef
@@ -11,7 +12,8 @@ function App() {
     zacetna_investicija: '',
     leta: '',
     donos: '',
-    provizije_skladi: ''
+    provizije_skladi: '',
+    mesecni_prispevek: ''
   });
 
   // Pove v kakšnem stanju je polje
@@ -27,7 +29,8 @@ function App() {
     zacetna_investicija: FieldState.Empty,
     leta: FieldState.Empty,
     donos: FieldState.Empty,
-    provizije_skladi: FieldState.Empty
+    provizije_skladi: FieldState.Empty,
+    mesecni_prispevek: FieldState.Empty
   });
 
   // Tukaj shranimo rezultate izračunov
@@ -44,14 +47,27 @@ function App() {
     ali_vse_prav();
   }, [fieldState]);
 
+  //da nimas handle_change za vsak field
   function handle_change(event) {
+    // vedno ko imaš useRef moraš dat .current, da dobiš vrednost
+    // event.target je html element na katerem smo trenutno
+    // name pa definiramo sami za vsak input hmtl element in name more bit enak kot kljuc od vrednosti v useRef
     podatki.current[event.target.name] = event.target.value;
     // To lahko kličemo tukaj, ker so vrdnosti polj v useRef in se posodobijo takoj
     validateFieldsColorize();
   }
 
 //----------------------------------------------------------------------
+  function formatDecimal(number) {
+    const moneyFormatter = new Intl.NumberFormat('sl-SI', {
+      style: 'currency',
+      currency: 'EUR',
+      minimumFractionDigits: 2
+    });
+    return moneyFormatter.format(number);
+  }
 
+//----------------------------------------------------------------------
   //napisat morm tri funkcije:
     //navadno investiranje
     //precudoviti skladi
@@ -61,10 +77,13 @@ function App() {
 
     function pritisnjen_gumb(event){
       event.preventDefault();
+      const navadnoInvestiranje = navadno_investiranje()
+      const skladi = precudoviti_skladi()
+      const raz = razlika();
       // Nastavimo state na rezultate
-      setNavadnoInvestiranjeResult(navadno_investiranje());
-      setSkladiResult(precudoviti_skladi());
-      setRazlikaResult(razlika());
+      setNavadnoInvestiranjeResult(formatDecimal(navadnoInvestiranje));
+      setSkladiResult(formatDecimal(skladi));
+      setRazlikaResult(formatDecimal(raz));
       // Prikažemo rezultat
       setShowResult(true);
     }   
@@ -141,49 +160,98 @@ function App() {
 //----------------------------------------------------------------------
   return (
     
-    <div className='cela_forma'>
-        <h1>Investiranje</h1>
+  <div className='container'>
 
-        <form className='forma'>
+    <div className="header">
+    <h1>Izračun donosa investicij</h1>
+    <p>Vzajemni aktivni skladi so scam! Prepricajte se! </p>
+
+    </div>
+    
+    
+    <div>
+        <form className='block'>
+        
+          
+        {/*za vsako; zactna investicija, leto, donos, mesecni prispevek... smo naredili to*/ }
+      <div className='form-row'>
+        <div className='form-group'>
           <label htmlFor="zacetna_investicija">Začetna investicija: </label>
           <input type='text' name='zacetna_investicija' className={fieldState.zacetna_investicija} onChange={ (event) => {handle_change(event)} } required></input>
-          
-          <br></br>
-          <br></br>
+        </div>
+      
+
+        <div className='form-group'>
           <label htmlFor="leta">Koliko let boste držali notri keš? </label>
           {/* ce hocemo samo eno funkcijo klicati on change, damo normalno samo on change in v zavite oklepaje to nunkcijo, ce pa hocemo dve nardimo pa tkole*/}
           <input type='text' name='leta' className={fieldState.leta} onChange={ (event) => {handle_change(event)} } required></input>
-          <br></br>
-          <br></br>
+        </div>
+      </div>
+
+
+
+
+      <div className='form-row'>
+        <div className='form-group'>
           <label htmlFor="donos">Donos v %: </label>
           <input type='text' name='donos' className={fieldState.donos} onChange={ (event) => {handle_change(event)} } required></input>
-          <br></br>
-          <br></br>
+        </div>
+      
+        <div className='form-group'>
           <label htmlFor="provizije_skladi">Provizije pri skladih: </label>
           <input type='text' name='provizije_skladi' className={fieldState.provizije_skladi} onChange={ (event) => {handle_change(event)} } required></input>
-          <br></br>
-          <br></br>
-          
+        </div>
+      </div> 
+
+
+
+      <div className='form-row'>
+        <div className='form-group'>
+          <label htmlFor="mesecni_prispevek">Mesečni prispevek: </label>
+          <input type='text' name='mesecni_prispevek' className={fieldState.mesecni_prispevek} onChange={ (event) => {handle_change(event)} }></input>
+        </div>
+      </div>
+
           <button onClick={(e) => pritisnjen_gumb(e)} disabled={!vse_prav} className={vse_prav ? "je" : "ni"}>Izračun</button>
         </form>
 
         <br></br>
         <br></br>
 
-        {showResult && <div id='rezultati'>  
-          <div>Navadno investiranje: {navadnoInvestiranjeResult}</div>
-          <div>Precudoviti skladi: {skladiResult}</div>
-          <div>Razlika: {razlikaResult}</div>
-        </div>} 
 
-          <br></br>
-          <br></br>
+
+        {showResult && 
+        <section>
+        <h1>Donos:</h1>
+        <div className='block'>
+
+        <div className='result-row'> 
+          <div className='result-box' id='navadno-investiranje'>Navadno investiranje: 
+            <div className='result-number'>{navadnoInvestiranjeResult}</div>
+          </div>
+
+          
+
+          <div className='result-box' id='skladi'>Precudoviti skladi: 
+            <div className='result-number'> {skladiResult}</div>
+          </div>
+
+      
+
+          <div className='result-box' id='razlika'>Razlika: 
+            <div className='result-number'>{razlikaResult}</div>
+          </div>
+
+        </div>
+        </div>
+        </section>}
+
+          
+     </div>
+
     </div>
-
   );
 }
 
 export default App;
 
-//DELA VSE VSE DELA KUL, SAM PROBLEM IMAM Z UNIM KORAKOM K UPDEJTA EN KORAK PREPOZNO :)
-// BUREK
