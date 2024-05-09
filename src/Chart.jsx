@@ -1,3 +1,4 @@
+import { formatDecimal } from './util';
 import './App.css';
 
 import {
@@ -26,6 +27,20 @@ export const options = {
       display: false,
       text: '',
     },
+    tooltip: {
+      callbacks: {
+        label: function(context) {
+          let label = context.dataset.label || '';
+          if (label) {
+              label += ': ';
+          }
+          if (context.parsed.y !== null) {
+              label += formatDecimal(context.parsed.y);
+          }
+          return label;
+        }
+      }
+    }
   },
   responsive: true,
   interaction: {
@@ -48,7 +63,7 @@ export const options = {
       ticks: {
         // Include a dollar sign in the ticks
         callback: function(value, index, ticks) {
-            return value + '€';
+            return formatDecimal(value, 0);
         },
       },
       stacked: true,
@@ -59,7 +74,10 @@ export const options = {
 
 function Chart({chartDataNavadno, chartDataSkladi}) {
 
-  const labels = Array.from(chartDataNavadno.keys().map(key => key+1));
+  const labels = Array.from(chartDataNavadno.keys());
+  for (let i = 0; i < labels.length; i++) {
+    labels[i] = labels[i] + 1;
+  }
 
   const data = {
     labels,
@@ -80,9 +98,11 @@ function Chart({chartDataNavadno, chartDataSkladi}) {
   };
 
   return (
-    <div className="chart-container">
-      <Bar options={options} data={data} />
-    </div>
+    <>
+      <div className="chart-container">
+        <Bar options={options} data={data} />
+      </div>
+    </>
   )
 }
 

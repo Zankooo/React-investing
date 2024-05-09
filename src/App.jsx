@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import Chart from './Chart';
+import { formatDecimal } from './util';
 import './App.css';
 
 function App() {
@@ -19,6 +20,8 @@ function App() {
 
   let chartDataNavadno = useRef([]);
   let chartDataSkladi = useRef([]);
+
+  let resultRef = useRef(null);
 
   // Pove v kakšnem stanju je polje
   // To je kot neke vrste enum
@@ -71,15 +74,6 @@ function App() {
     //in napisem eno funkcijo ki klice vse te tri
     //in to funkcijo dam da se na klik  buttona izvede 
 
-    function formatDecimal(number) {
-      const moneyFormatter = new Intl.NumberFormat('sl-SI', {
-        style: 'currency',
-        currency: 'EUR',
-        minimumFractionDigits: 2
-      });
-      return moneyFormatter.format(number);
-    }
-
     function pritisnjen_gumb(event){
       event.preventDefault();
 
@@ -88,12 +82,8 @@ function App() {
 
       const navadnoInvestiranjeSeq = navadno_investiranje();
       const skladiSeq = precudoviti_skladi();
-      const navadnoInvestiranje = navadnoInvestiranjeSeq.reduce((acc, curr) => 
-        acc + curr
-      , 0);
-      const skladi = skladiSeq.reduce((acc, curr) => 
-        acc + curr
-      , 0);
+      const navadnoInvestiranje = navadnoInvestiranjeSeq[navadnoInvestiranjeSeq.length - 1];
+      const skladi = skladiSeq[skladiSeq.length - 1];
 
       chartDataNavadno.current = navadnoInvestiranjeSeq;
       chartDataSkladi.current = skladiSeq;
@@ -106,6 +96,7 @@ function App() {
 
       // Prikažemo rezultat
       setShowResult(true);
+      scrollToResult();
     }   
 
 //----------------------------------------------------------------------
@@ -187,6 +178,17 @@ function App() {
         }
       });
     }
+
+    function addEurLabel(event) {
+      // event.target.value = formatDecimal(event.target.value);
+    }
+
+    function scrollToResult() {
+      if (!resultRef.current) return;
+      resultRef.current.scrollIntoView({
+        behavior: 'smooth'
+      })
+    }
   
 //----------------------------------------------------------------------
   return (
@@ -198,33 +200,28 @@ function App() {
 
       <div>
         <form className='block'>
-          <div className="form-row">
+          <div className="form-grid">
             <div className="form-group">
               <label htmlFor="zacetna_investicija">Začetna investicija: </label>
-              <input type='text' name='zacetna_investicija' className={fieldState.zacetna_investicija} onChange={ (event) => {handle_change(event)} } required></input>
+              <input type='text' name='zacetna_investicija' className={fieldState.zacetna_investicija} onChange={ (event) => {handle_change(event)} } onBlur={(event) => addEurLabel(event)} required></input>
             </div>
             
             <div className="form-group">
               <label htmlFor="leta">Koliko let boste držali notri keš? </label>
               <input type='text' name='leta' className={fieldState.leta} onChange={ (event) => {handle_change(event)} } required></input>
             </div>
-          </div>
           
           {/* ce hocemo samo eno funkcijo klicati on change, damo normalno samo on change in v zavite oklepaje to nunkcijo, ce pa hocemo dve nardimo pa tkole*/}
           
-          <div className="form-row">
             <div className="form-group">
               <label htmlFor="donos">Donos v %: </label>
               <input type='text' name='donos' className={fieldState.donos} onChange={ (event) => {handle_change(event)} } required></input>
             </div>
-            
             <div className="form-group">
               <label htmlFor="provizije_skladi">Provizije pri skladih: </label>
               <input type='text' name='provizije_skladi' className={fieldState.provizije_skladi} onChange={ (event) => {handle_change(event)} } required></input>
             </div>
-          </div>
-          
-          <div className="form-row">
+        
             <div className="form-group">
               <label htmlFor="mesecni_prispevek">Mesečni prispevek: </label>
               <input type="text" name="mesecni_prispevek" className={fieldState.mesecni_prispevek} onChange={ (event) => {handle_change(event)} } required></input>
@@ -244,22 +241,22 @@ function App() {
       </div>
 
       {showResult && 
-      <section id='result'>
+      <section id='result' ref={resultRef}>
         <h1>Donos</h1>
         <div className='block'>
           <div className='result-row'>
             <div className='result-box' id='navadno-investiranje'>
               <p>Navadno investiranje</p>
-              <div className='result-number'>{formatDecimal(navadnoInvestiranjeResult)}</div>
+              <div className='result-number'>{formatDecimal(navadnoInvestiranjeResult, 2)}</div>
             </div>
             <div className='result-box' id='skladi'>
               <p>Precudoviti skladi</p>
-              <div className='result-number'>{formatDecimal(skladiResult)}</div>
+              <div className='result-number'>{formatDecimal(skladiResult, 2)}</div>
             </div>
             <div className='result-box' id='razlika'>
               <p>Razlika</p>
               <div className="row">
-                <div className='result-number'>{formatDecimal(razlikaResult)}</div>
+                <div className='result-number'>{formatDecimal(razlikaResult, 2)}</div>
                 <div className='diff-percent'>(-{((parseFloat(razlikaResult) / parseFloat(navadnoInvestiranjeResult))*100).toFixed(2)} %)</div>
               </div>
             </div>
