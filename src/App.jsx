@@ -1,6 +1,8 @@
 import { useEffect, useState, useRef } from 'react';
+import { Tooltip } from 'react-tooltip';
 import Chart from './Chart';
 import { formatDecimal } from './util';
+import { FaQuestionCircle } from "react-icons/fa";
 import './App.css';
 
 function App() {
@@ -218,7 +220,13 @@ function App() {
               <input type='text' name='donos' className={fieldState.donos} onChange={ (event) => {handle_change(event)} } required></input>
             </div>
             <div className="form-group">
-              <label htmlFor="provizije_skladi">Letna provizija vzajemnih skladov (%)</label>
+              <div className="row">
+                <label htmlFor="provizije_skladi">Letna provizija vzajemnih skladov (%)</label>
+                <FaQuestionCircle size={18} id='tooltip'/>
+                <Tooltip anchorSelect="#tooltip" place="top">
+                  Običajno so upravljalske provizije 2-3%
+                </Tooltip>
+              </div>
               <input type='text' name='provizije_skladi' className={fieldState.provizije_skladi} onChange={ (event) => {handle_change(event)} } required></input>
             </div>
         
@@ -257,9 +265,6 @@ function App() {
               <p>Razlika</p>
               <div className='result-number'>{formatDecimal(razlikaResult, 2)}</div>
                 <div className='diff-percent'>(-{((parseFloat(razlikaResult) / parseFloat(navadnoInvestiranjeResult))*100).toFixed(2)} %)</div>
-              <div className="row">
-                
-              </div>
             </div>
           </div>
           <Chart chartDataNavadno={chartDataNavadno.current} chartDataSkladi={chartDataSkladi.current}/>
