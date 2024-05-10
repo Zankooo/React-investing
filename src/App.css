@@ -1,114 +1,146 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
+:root {
+  --primary-color: blue;
+}
+
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
 body {
-  font-family: "Poppins", sans-serif;
-  height: 100vh;
+	font-family: "Poppins", sans-serif;
+	height: auto;
 }
 
-
-form {
-  display: inline-block;
-  text-align: left;
+h1 {
+  font-weight: 400;
+  line-height: 1.2em;
 }
 
-.container{
+.container {
   width: 100%;
   margin: 0 auto;
-  padding: 0 20px;
-  
+	padding: 0 50px;
 }
 
-.header{
+.header {
+  padding: 20px 0 0 0;
   margin-bottom: 20px;
 }
 
-.block{
-  background-color: #e9e9e9;
-  padding: 20px 30px;
-  border-radius: 10px;
-  border: 1px solid cyan;
-  width: 100%;
+.form-grid {
+  display: grid;
+  grid-template-columns: 350px 1fr;
 }
 
-.result-box{
-  padding: 20px;
-  border-radius: 10px;
-  border: 1px solid black;
-  text-align: center;
-  margin: 0 20px 0 0;
-  color: white;
-  width: 25%;
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin: 0 30px 0 0;
+  min-width: 300px;
 }
 
-.result-number{
-  font-size: 20px;
-
-}
-
-.result-row{
+.row {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  
+  align-items: center;
 }
 
-#navadno-investiranje{
-  background-color: #3D8AFF;
-}
-#skladi{
-  background-color: #FF9A3D;
+.diff-percent {
+  margin: 0 0 0 7px;
 }
 
-#razlika{
-  background-color: #FF3D48;
+.block {
+  background-color: #E9E9E9;
+  padding: 20px 30px;
+  border-radius: 10px;
+  margin-bottom: 25px;
+}
+#result {
+  margin-bottom: 50px;
 }
 
-.form-group{
+.result-box > p {
+  margin-bottom: 15px;
+}
+
+.result-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+
+.result-box {
   display: flex;
   flex-direction: column;
-  width:333px;
+  width: 300px;
+  color: #fff;
+  padding: 20px 30px;
+  border-radius: 10px;
+  text-align: center;
   margin: 0 20px 0 0;
 }
 
-input{
-  padding: 10px;
-  border-radius: 5px;
-}
-
-.form-row{
-  display: flex;
-  flex-direction: row;
-  
-}
-
-button{
-  outline:none;
-  border: 1px solid black;
-  padding: 13px 25px;
-  color:#fff;
+.result-number {
+  font-size: 18px;
   font-weight: 500;
+  overflow-wrap: break-word;
+}
+
+.chart-container {
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+.footer {
+  position: relative;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 10px 20px;
+  background-color: #E9E9E9;
+}
+
+#navadno-investiranje {
+  background-color: #3D8AFF;
+}
+
+#skladi {
+  background-color: #FF9A3D;
+}
+
+#razlika {
+  background-color: #FF3D48;
+}
+
+input, select {
+  padding: 10px;
   border-radius: 7px;
-  font-size: 15px;
-  margin-top: 10px;
-  
+  max-width: 350px;
 }
 
-button:disabled{
+button {
+  outline: none;
+  border: none;
+  padding: 15px 25px;
+  margin: 20px 0 0;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 7px;
+}
+
+button:disabled {
   background-color: #aeceff;
-  border: 2px solid red;
 }
 
-button:enabled{
-  border: 2px solid green;
+button:enabled {
   cursor: pointer;
   background-color: #3D8AFF;
-  
 }
 
 #rezultati{
@@ -116,23 +148,75 @@ button:enabled{
   border-radius: 20px;
   margin: 10px;
   padding: 10px
-
 }
-
-
 
 input:focus{
   outline: none;
 }
 
-input[type=text].empty {
-  border: 2px solid rgb(170, 170, 170);
+.empty, select {
+  border: 2px solid rgb(190, 190, 190);
 }
 
-.valid{
+.valid {
   border: 3px solid rgb(23, 138, 23) !important;
 }
 
-.invalid{
+.invalid {
   border: 3px solid rgb(242, 78, 78) !important;
+}
+
+/* Tablets and under */
+@media(max-width: 768px) {
+  .form-grid {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .result-row {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .result-box {
+    margin-bottom: 15px;
+    width: auto;
+  }
+
+  input {
+    width: auto;
+    font-size: 1rem;
+  }
+
+  .form-group {
+    margin-bottom: 10px;
+  }
+}
+
+/* Mobile */
+@media(max-width: 500px) {
+  .form-grid {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .result-row {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .result-box {
+    margin-bottom: 15px;
+  }
+
+  input {
+    width: auto;
+    font-size: 1rem;
+  }
+
+  .container {
+    padding: 0 10px;
+  }
 }
