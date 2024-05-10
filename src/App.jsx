@@ -194,44 +194,43 @@ function App() {
   return (
     <div className='container'>
       <div className="header">
-        <h1>Izračun donosa investicij</h1>
-        <p>Skladi so scam! Prepričajte se sami!</p>
+        <h1>Primerjava donosa: Pasivni ETF in Aktivni vzajemni skladi</h1>
       </div>
 
       <div>
         <form className='block'>
           <div className="form-grid">
             <div className="form-group">
-              <label htmlFor="zacetna_investicija">Začetna investicija: </label>
+              <label htmlFor="zacetna_investicija">Začetna investicija {"(€)"}</label>
               <input type='text' name='zacetna_investicija' className={fieldState.zacetna_investicija} onChange={ (event) => {handle_change(event)} } onBlur={(event) => addEurLabel(event)} required></input>
             </div>
             
             <div className="form-group">
-              <label htmlFor="leta">Koliko let boste držali notri keš? </label>
+              <label htmlFor="leta">Čas investiranja (leta)</label>
               <input type='text' name='leta' className={fieldState.leta} onChange={ (event) => {handle_change(event)} } required></input>
             </div>
           
           {/* ce hocemo samo eno funkcijo klicati on change, damo normalno samo on change in v zavite oklepaje to nunkcijo, ce pa hocemo dve nardimo pa tkole*/}
           
             <div className="form-group">
-              <label htmlFor="donos">Donos v %: </label>
+              <label htmlFor="donos">Letni donos (%)</label>
               <input type='text' name='donos' className={fieldState.donos} onChange={ (event) => {handle_change(event)} } required></input>
             </div>
             <div className="form-group">
-              <label htmlFor="provizije_skladi">Provizije pri skladih: </label>
+              <label htmlFor="provizije_skladi">Letna provizija vzajemnih skladov (%)</label>
               <input type='text' name='provizije_skladi' className={fieldState.provizije_skladi} onChange={ (event) => {handle_change(event)} } required></input>
             </div>
         
             <div className="form-group">
-              <label htmlFor="mesecni_prispevek">Mesečni prispevek: </label>
+              <label htmlFor="mesecni_prispevek">Mesečni prispevek (€)</label>
               <input type="text" name="mesecni_prispevek" className={fieldState.mesecni_prispevek} onChange={ (event) => {handle_change(event)} } required></input>
             </div>
 
             <div className="form-group">
               <label htmlFor="frekvenca">Frekvenca obrestovanja: </label>
               <select name="frekvenca" id="frekvenca" onChange={(event) => handle_change(event)}>
-                <option value={Frekvenca.Anually}>letno</option>
-                <option value={Frekvenca.Monthly}>mesečno</option>
+                <option value={Frekvenca.Anually}>Letno</option>
+                <option value={Frekvenca.Monthly}>Mesečno</option>
               </select>
             </div>
           </div>
@@ -246,18 +245,19 @@ function App() {
         <div className='block'>
           <div className='result-row'>
             <div className='result-box' id='navadno-investiranje'>
-              <p>Navadno investiranje</p>
+              <p>Pasivni ETF</p>
               <div className='result-number'>{formatDecimal(navadnoInvestiranjeResult, 2)}</div>
             </div>
             <div className='result-box' id='skladi'>
-              <p>Precudoviti skladi</p>
+              <p>Aktivni vzajemni skladi</p>
               <div className='result-number'>{formatDecimal(skladiResult, 2)}</div>
             </div>
             <div className='result-box' id='razlika'>
               <p>Razlika</p>
-              <div className="row">
-                <div className='result-number'>{formatDecimal(razlikaResult, 2)}</div>
+              <div className='result-number'>{formatDecimal(razlikaResult, 2)}</div>
                 <div className='diff-percent'>(-{((parseFloat(razlikaResult) / parseFloat(navadnoInvestiranjeResult))*100).toFixed(2)} %)</div>
+              <div className="row">
+                
               </div>
             </div>
           </div>
