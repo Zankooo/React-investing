@@ -192,7 +192,7 @@ function App() {
   
 //----------------------------------------------------------------------
   return (
-    <>
+    <div className='page'>
       <div className='container'>
       <div className="header">
         <h1>Primerjava donosa: Pasivni ETF in Aktivni vzajemni skladi</h1>
@@ -269,7 +269,7 @@ function App() {
     <footer className='footer'>
       v1.0 | 10. 05. 2024
     </footer>
-    </>
+    </div>
 
   );
 }
