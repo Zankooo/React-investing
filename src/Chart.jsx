@@ -83,13 +83,13 @@ function Chart({chartDataNavadno, chartDataSkladi}) {
     labels,
     datasets: [
       {
-        label: 'Navadno investiranje',
+        label: 'Pasivni ETF',
         data: chartDataNavadno,
         backgroundColor: '#3D8AFF',
         stack: 'Stack 0',
       },
       {
-        label: 'Skladi',
+        label: 'Vzajemni skladi',
         data: chartDataSkladi,
         backgroundColor: '#FF9A3D',
         stack: 'Stack 1',

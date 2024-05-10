@@ -192,7 +192,8 @@ function App() {
   
 //----------------------------------------------------------------------
   return (
-    <div className='container'>
+    <>
+      <div className='container'>
       <div className="header">
         <h1>Primerjava donosa: Pasivni ETF in Aktivni vzajemni skladi</h1>
       </div>
@@ -241,7 +242,7 @@ function App() {
 
       {showResult && 
       <section id='result' ref={resultRef}>
-        <h1>Donos</h1>
+        <h1>Rezultati</h1>
         <div className='block'>
           <div className='result-row'>
             <div className='result-box' id='navadno-investiranje'>
@@ -265,7 +266,10 @@ function App() {
         </div>
       </section>} 
     </div>
-    
+    <footer className='footer'>
+      v1.0 | 10. 05. 2024
+    </footer>
+    </>
 
   );
 }

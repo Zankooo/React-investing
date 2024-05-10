@@ -12,7 +12,7 @@
 
 body {
 	font-family: "Poppins", sans-serif;
-	height: 100vh;
+	height: auto;
 }
 
 h1 {
@@ -60,6 +60,9 @@ h1 {
   border-radius: 10px;
   margin-bottom: 25px;
 }
+#result {
+  margin-bottom: 50px;
+}
 
 .result-box > p {
   margin-bottom: 15px;
@@ -81,7 +84,6 @@ h1 {
   border-radius: 10px;
   text-align: center;
   margin: 0 20px 0 0;
-  
 }
 
 .result-number {
@@ -93,6 +95,15 @@ h1 {
 .chart-container {
   max-width: 1024px;
   margin: 0 auto;
+}
+
+.footer {
+  position: relative;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 10px 20px;
+  background-color: #E9E9E9;
 }
 
 #navadno-investiranje {
