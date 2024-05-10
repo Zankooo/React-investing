@@ -12,12 +12,19 @@
 
 body {
 	font-family: "Poppins", sans-serif;
-	height: auto;
+	height: 100vh;
 }
 
 h1 {
   font-weight: 400;
   line-height: 1.2em;
+}
+
+.page {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .container {
@@ -98,7 +105,6 @@ h1 {
 }
 
 .footer {
-  position: relative;
   left: 0;
   bottom: 0;
   width: 100%;
