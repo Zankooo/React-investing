@@ -11,6 +11,9 @@ function App() {
   // Te vrednosti lahko niso number!
   // useRef je zelo podobno kot navadna spremenljivka, samo da navadna spremenljivka ne ohrani svoje vrednosti, ko se komponenta rerendera
   // useRef ohrani vrednost, ampak njegove spremembe ne sprožijo re-rendera tako kot pri useState
+
+  //ta stvar ima podatke od vsakega vnosa
+  //te se checkajo samo k gumb prtisnes
   const podatki = useRef({
     zacetna_investicija: '',
     leta: '',
@@ -39,6 +42,7 @@ function App() {
   }
 
   // Želimo, da se barva inputov posodablja sproti, ko spreminjamo vrednosti, zato uporabimo useState
+  //ta stvar je pa valid invalid alpa empty, in preglejujejmo konstannto da umogocimo nato gumbu da je na boljo alpa ne 
   const [fieldState, setFieldState] = useState({
     zacetna_investicija: FieldState.Empty,
     leta: FieldState.Empty,
@@ -51,6 +55,7 @@ function App() {
   const [navadnoInvestiranjeResult, setNavadnoInvestiranjeResult] = useState(null);
   const [skladiResult, setSkladiResult] = useState(null);
   const [razlikaResult, setRazlikaResult] = useState(null);
+  const [vsotaSkupnoInvestiranje, setVsotaSkupnoInvestiranje] = useState(null);
 
   const [vse_prav, set_vse_prav] = useState(false);
   const [showResult, setShowResult] = useState(false);
@@ -96,9 +101,17 @@ function App() {
       setSkladiResult(skladi);
       setRazlikaResult(raz);
 
+      setVsotaSkupnoInvestiranje(formatDecimal(
+        parseInt(podatki.current.zacetna_investicija) + 
+        parseInt(podatki.current.leta)  * 
+        parseInt(podatki.current.mesecni_prispevek * 12), 2));
+
       // Prikažemo rezultat
       setShowResult(true);
       scrollToResult();
+
+
+      
     }   
 
 //----------------------------------------------------------------------
@@ -155,7 +168,22 @@ function App() {
     }
 
 //---------------------
+    
+    // Za vsak input preverimo njegovo vrednost in v skladu s tam nastavimo njegovo stanje
+    //loopa cez vse in nastavi state za vsak input; empty, valid alpa invalid
+    function validateFieldsColorize() {
+      Object.keys(fieldState).forEach((s) => {
+        if (podatki.current[s] === '') {
+          setFieldState(prev => ({...prev, [s]: FieldState.Empty}));
+        } else if (isNaN(podatki.current[s])) {
+          setFieldState(prev => ({...prev, [s]: FieldState.Invalid}));
+        } else {
+          setFieldState(prev => ({...prev, [s]: FieldState.Valid}));
+        }
+      });
+    }
 
+    //ta pa tudi loopa ampak pogleda ce je vsaka valid
     function ali_vse_prav() {
       const prav = Object.keys(fieldState).every((k) => {
         return fieldState[k] === FieldState.Valid
@@ -168,18 +196,7 @@ function App() {
       }
     }
 
-    // Za vsak input preverimo njegovo vrednost in v skladu s tam nastavimo njegovo stanje
-    function validateFieldsColorize() {
-      Object.keys(fieldState).forEach((s) => {
-        if (podatki.current[s] === '') {
-          setFieldState(prev => ({...prev, [s]: FieldState.Empty}));
-        } else if (isNaN(podatki.current[s])) {
-          setFieldState(prev => ({...prev, [s]: FieldState.Invalid}));
-        } else {
-          setFieldState(prev => ({...prev, [s]: FieldState.Valid}));
-        }
-      });
-    }
+
 
     function addEurLabel(event) {
       // event.target.value = formatDecimal(event.target.value);
@@ -252,6 +269,9 @@ function App() {
       <section id='result' ref={resultRef}>
         <h1>Rezultati</h1>
         <div className='block'>
+          <div className="result-number" style={{marginBottom: "12px"}}>
+            Investicija: {vsotaSkupnoInvestiranje}
+          </div>
           <div className='result-row'>
             <div className='result-box' id='navadno-investiranje'>
               <p>Pasivni ETF</p>
