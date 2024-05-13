@@ -66,6 +66,12 @@ function App() {
     ali_vse_prav();
   }, [fieldState]);
 
+  useEffect(() => {
+    if (showResult) {
+      resultRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [showResult]);
+
   function handle_change(event) {
     podatki.current[event.target.name] = event.target.value;
     // To lahko kličemo tukaj, ker so vrdnosti polj v useRef in se posodobijo takoj
@@ -109,9 +115,7 @@ function App() {
       // Prikažemo rezultat
       setShowResult(true);
       scrollToResult();
-
-
-      
+    
     }   
 
 //----------------------------------------------------------------------
@@ -203,10 +207,9 @@ function App() {
     }
 
     function scrollToResult() {
-      if (!resultRef.current) return;
-      resultRef.current.scrollIntoView({
+      resultRef.current?.scrollIntoView({
         behavior: 'smooth'
-      })
+      });
     }
   
 //----------------------------------------------------------------------
