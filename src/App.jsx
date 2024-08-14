@@ -4,6 +4,8 @@ import Chart from './Chart';
 import { formatDecimal } from './util';
 import { FaQuestionCircle } from "react-icons/fa";
 import './App.css';
+import { Analytics } from "@vercel/analytics/react";
+
 
 function App() {
 
@@ -297,7 +299,11 @@ function App() {
     <footer className='footer'>
       v1.0 | 10. 05. 2024
     </footer>
+
+    <Analytics/>
     </div>
+  
+    
 
   );
 }
