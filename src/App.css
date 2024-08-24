@@ -53,8 +53,8 @@ h1 {
 
 .row {
   display: flex;
-  flex-direction: row;
   align-items: center;
+  
 }
 
 .diff-percent {
@@ -113,8 +113,10 @@ h1 {
   background-color: #E9E9E9;
 }
 
-#tooltip {
-  margin-left: 7px;
+#tooltip1, #tooltip2 {
+  margin-left: 5px;
+  margin-bottom: 2px;
+  
 }
 
 #navadno-investiranje {

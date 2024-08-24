@@ -238,19 +238,27 @@ function App() {
           {/* ce hocemo samo eno funkcijo klicati on change, damo normalno samo on change in v zavite oklepaje to nunkcijo, ce pa hocemo dve nardimo pa tkole*/}
           
             <div className="form-group">
-              <label htmlFor="donos">Letni donos (%)</label>
+              <div className="row">
+                <label htmlFor="donos" >Letni donos (%)</label>
+                <FaQuestionCircle size={18} id='tooltip1'/>
+                  <Tooltip anchorSelect="#tooltip1" place="top">
+                    Povprečje ameriškega indeksa S&P 500 je: 10%
+                </Tooltip>
+              </div>
               <input type='text' name='donos' className={fieldState.donos} onChange={ (event) => {handle_change(event)} } required></input>
             </div>
+
+
             <div className="form-group">
               <div className="row">
                 <label htmlFor="provizije_skladi">Letna provizija vzajemnih skladov (%)</label>
-                <FaQuestionCircle size={18} id='tooltip'/>
-                <Tooltip anchorSelect="#tooltip" place="top">
-                  Običajno so upravljalske provizije 2-3%
-                </Tooltip>
+                <FaQuestionCircle size={18} id='tooltip2'/>
+                <Tooltip anchorSelect="#tooltip2" place="top" content='Običajno so upravljalske provizije 2-3%' />
               </div>
               <input type='text' name='provizije_skladi' className={fieldState.provizije_skladi} onChange={ (event) => {handle_change(event)} } required></input>
             </div>
+
+
         
             <div className="form-group">
               <label htmlFor="mesecni_prispevek">Mesečni prispevek (€)</label>
