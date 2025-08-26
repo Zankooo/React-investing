@@ -3,7 +3,7 @@
 
 
 ## Namen
-Program primerja face to face grafično investiranje na eni strani v pasivne etfje in na drugi strani v aktivne vzajemne sklade.
+Program primerja face to face z grafom investiranje na eni strani v pasivne etfje in na drugi strani v aktivne vzajemne sklade.
 
 Program nam jasno prikaže kako na prvi pogled majhne letne upravljalske provizije (2-3%) pri aktivno vodenih vzajemnih skladih zmanjšujejo naše potencialne dobičke na dolgi rok.
 
