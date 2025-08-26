@@ -82,12 +82,7 @@ function App() {
 
 //----------------------------------------------------------------------
 
-  //napisat morm tri funkcije:
-    //navadno investiranje
-    //precudoviti skladi
-    //razlika
-    //in napisem eno funkcijo ki klice vse te tri
-    //in to funkcijo dam da se na klik  buttona izvede 
+  
 
     function pritisnjen_gumb(event){
       event.preventDefault();
