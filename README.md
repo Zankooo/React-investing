@@ -1,24 +1,26 @@
-# Grafični primerjalnik etf-ji in vzajemni skladi 
+# 📊 Grafični primerjalnik: Pasivni ETF-ji vs Aktivni vzajemni skladi
 
+## 🎯 Namen
+Program prikazuje grafično primerjavo med pasivnimi ETF-ji na eni strani in aktivno vodenimi vzajemnimi skladi na drugi. Namen je pokazati, kako nam videz majhne letne upravljalske provizije (2-3%) pri aktivno vodenih vzajemnih skladih zmanjšujejo potencialne dobičke na dolgi rok.
 
+## 📝 Opomba
+Čeprav so stroški tudi pri pasivnih ETF-jih (običajno med 0,07% in 0,2%), sem te stroške v programu ignoriral in predpostavili, da so 0%. To predvsem zaradi dejstva, da so ti stroški bistveno manjši v primerjavi z upravljalskimi provizijami pri aktivnih vzajemnih skladih.
 
-## Namen
-Program primerja face to face z grafom investiranje na eni strani v pasivne etfje in na drugi strani v aktivne vzajemne sklade.
+## 🌐 Povezava do aplikacije:
+Aplikacijo je na voljo tukaj:  
+[ETF vs. Vzajemni skladi](https://etf-vs-vzajemni-skladi.vercel.app)
 
-Program nam jasno prikaže kako na prvi pogled majhne letne upravljalske provizije (2-3%) pri aktivno vodenih vzajemnih skladih zmanjšujejo naše potencialne dobičke na dolgi rok.
+## 🖥 Zagon projekta lokalno
+- Kloniramo projekt:  
+  `git clone https://github.com/Zankooo/React-investing.git`
 
-## Opomba
-Čeprav so v realnosti tudi stroški pri pasivnih etf-jih (v veliki meri 0,07% - 0,2%) smo jih v programu ignorirali in smatrali da so 0%. Predvsem, ker je strošek le teh precej precej manjši.
+- Ker je projekt zgrajen z uporabo React frameworka, moramo nastaviti okolje:  
+  `npm install`
 
-## Program (aplikacija) na voljo:
-https://etf-vs-vzajemni-skladi.vercel.app
+- Nato zaženenemo aplikacijo z ukazom:  
+  `npm start`
 
-## Zagon projekta lokalno
-- Kloniramo projekt: `git clone https://github.com/Zankooo/React-investing.git`
+Vsaka sprememba v projektu bo samodejno osvežila stran. 🔄
 
-- Ker je projekt narejen z uporabo frameworka React, moramo nastaviti okolje: `npm install`
-
-- In sedaj še poženemo program z ukazom `npm start`
-
-Vedno ko naredimo spremembo v projektu, se bo avtomatsko refreshalo.
-
+## 📸 Posnetek zaslona aplikacije
+<img src="public/screenshot.png" width="500px">
