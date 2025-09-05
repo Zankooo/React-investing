@@ -23,4 +23,4 @@ Aplikacijo je na voljo tukaj:
 Vsaka sprememba v projektu bo samodejno osvežila stran. 🔄
 
 ## 📸 Posnetek zaslona aplikacije
-<img src="public/screenshot.png" width="500px">
+<img src="public/screenshot.png" width="800px">
