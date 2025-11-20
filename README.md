@@ -1,26 +1,28 @@
-# 📊 Grafični primerjalnik: Pasivni ETF-ji vs Aktivni vzajemni skladi
+# 📊 Visual Comparator: Passive ETFs vs Active Mutual Funds
 
-## 🎯 Namen
-Program prikazuje grafično primerjavo med pasivnimi ETF-ji na eni strani in aktivno vodenimi vzajemnimi skladi na drugi. Namen je pokazati, kako nam videz majhne letne upravljalske provizije (2-3%) pri aktivno vodenih vzajemnih skladih zmanjšujejo potencialne dobičke na dolgi rok.
+[🇸🇮 Preberi v slovenščini](./slo_readme/README.md)
 
-## 📝 Opomba
-Čeprav so stroški tudi pri pasivnih ETF-jih (običajno med 0,07% in 0,2%), sem te stroške v programu ignoriral in predpostavili, da so 0%. To predvsem zaradi dejstva, da so ti stroški bistveno manjši v primerjavi z upravljalskimi provizijami pri aktivnih vzajemnih skladih.
+## 🎯 Purpose
+This program provides a graphical comparison between passive ETFs on one side and actively managed mutual funds on the other. The goal is to show how seemingly small annual management fees (2–3%) in actively managed funds can significantly reduce long-term returns.
 
-## 🌐 Povezava do aplikacije:
-Aplikacijo je na voljo tukaj:  
-[ETF vs. Vzajemni skladi](https://etf-vs-vzajemni-skladi.vercel.app)
+## 📝 Note
+While passive ETFs also have fees (typically between 0.07% and 0.2%), these costs were ignored in the program and assumed to be 0%. This is because ETF fees are much lower compared to the management fees of actively managed mutual funds.
 
-## 🖥 Zagon projekta lokalno
-- Kloniramo projekt:  
+## 🌐 Link of app
+You can access the application here: 
+[ETF vs. Active Mutual Funds](https://etf-vs-vzajemni-skladi.vercel.app)
+
+## 🖥 Running the project locally
+- Clone the project:  
   `git clone https://github.com/Zankooo/React-investing.git`
 
-- Ker je projekt zgrajen z uporabo React frameworka, moramo nastaviti okolje:  
+- Since the project is built with the React framework, set up the environment with:
   `npm install`
 
-- Nato zaženenemo aplikacijo z ukazom:  
+- Then start the application using:
   `npm start`
 
-Vsaka sprememba v projektu bo samodejno osvežila stran. 🔄
+Any change in the project will automatically refresh the page. 🔄
 
-## 📸 Posnetek zaslona aplikacije
-<img src="public/screenshot.png" width="800px">
+## 📸 Application Screenshot
+<img src="/public/screenshot.png" width="800px">
